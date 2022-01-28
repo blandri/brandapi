@@ -3,7 +3,7 @@ import { ArticleServices } from '../services/articleServices';
 
 export class ArticleController {
   // TODO Don't access database from this file you only needs
-  async createArticle(req, res, next) {
+  static async createArticle(req, res, next) {
     try {
       const data = new Article({
         title: req.body.title,
@@ -12,26 +12,26 @@ export class ArticleController {
       const article = await ArticleServices.createArticle(data);
       res.send(article);
     } catch (error) {
-      res.status(404);
-      res.send({ error: 'No article created' });
+      res.status(404).send({ error: 'No article created' });
+      
     }
   }
-  async getAllArticles(req, res, next) {
+  static async getAllArticles(req, res, next) {
     try {
       const articles = await ArticleServices.getAllArticles();
       res.send(articles);
     } catch (error) {
-      res.status(404);
-      res.send({ error: 'Error! try again' });
+      res.status(404).send({ error: 'Error! try again' });
+      
     }
   }
-  async getArticle(req, res, next) {
+  static async getArticle(req, res, next) {
     try {
       const article = await ArticleServices.getArticle(req.params.id);
       res.send(article);
     } catch (error) {
-      res.status(404);
-      res.send({ error: 'Error! try again' });
+      res.status(404).send({ error: 'Error! try again' });
+      
     }
   }
   async updateArticle(req, res, next) {
@@ -51,8 +51,8 @@ export class ArticleController {
       const article = await ArticleServices.updateArticle(req.params.id, data);
       res.send(article);
     } catch (error) {
-      res.status(404);
-      res.send({ error: "Article doesn't exist!" });
+      res.status(404).send({ error: "Article doesn't exist!" });
+      
     }
   }
   async deleteArticle(req, res, next) {
@@ -60,8 +60,8 @@ export class ArticleController {
       await ArticleServices.deleteArticle(req.params.id);
       res.status(204).send();
     } catch {
-      res.status(404);
-      res.send({ error: "Article doesn't exist!" });
+      res.status(404).send({ error: "Article doesn't exist!" });
+      
     }
   }
 }

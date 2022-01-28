@@ -10,16 +10,17 @@ const mode = process.env.NODE_ENV || 'development';
 const server = async () => {
   try {
     if (mode === 'development') {
-      await mongoose.connect('mongodb://127.0.0.1:27017/devdb', {
+      await mongoose.connect(process.env.DEVELOPMENT_DB, {
         useNewUrlParser: true,
       });
     } else if (mode === 'test') {
-      await mongoose.connect('mongodb://127.0.0.1:27017/testdb', {
+      await mongoose.connect(process.env.TEST_DB, {
         useNewUrlParser: true,
       });
     } else if (mode === 'production') {
       await mongoose.connect(
-        'mongodb+srv://landry:mongodb@cluster0.2qprh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/proddb',
+        process.env.PRODUCTION_DB,
+
         {
           useNewUrlParser: true,
         }
