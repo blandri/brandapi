@@ -1,31 +1,39 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import multer from 'multer';
 import routes from './routes';
 import 'dotenv/config';
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 const app = express();
+
+
+
 
 const port = process.env.PORT || 3000;
 const mode = process.env.NODE_ENV || 'development';
 const server = async () => {
   try {
     if (mode === 'development') {
-      await mongoose.connect('mongodb://127.0.0.1:27017/devdb', {
+      await mongoose.connect(process.env.DEVELOPMENT_DB, {
         useNewUrlParser: true,
       });
     } else if (mode === 'test') {
-      await mongoose.connect('mongodb://127.0.0.1:27017/testdb', {
+      await mongoose.connect(process.env.TEST_DB, {
         useNewUrlParser: true,
       });
     } else if (mode === 'production') {
-      await mongoose.connect(
-        'mongodb+srv://landry:mongodb@cluster0.2qprh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/proddb',
-        {
-          useNewUrlParser: true,
-        }
-      );
+      await mongoose.connect(process.env.PRODUCTION_DB, {
+        useNewUrlParser: true,
+      });
     }
     app.use(express.json());
+    cloudinary.config({
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.API_KEY,
+      api_secret: process.env.API_SECRET,
+    });
     app.use('/api/v1/', routes);
     app.listen(port, () => {
       console.log(`The server is running on port ${port}`);

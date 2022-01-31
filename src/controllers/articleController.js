@@ -8,6 +8,7 @@ export class ArticleController {
       const data = new Article({
         title: req.body.title,
         content: req.body.content,
+        image: req.file.path,
       });
       const article = await ArticleServices.createArticle(data);
       res.send(article);
@@ -60,7 +61,7 @@ export class ArticleController {
       await ArticleServices.deleteArticle(req.params.id);
       res.status(204).send();
     } catch {
-      res.status(404);
+      res.status(404, 'no article');
       res.send({ error: "Article doesn't exist!" });
     }
   }

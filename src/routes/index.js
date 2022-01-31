@@ -11,4 +11,5 @@ routes.use('/articles', articleRoutes);
 routes.use('/queries', queriesRoutes);
 routes.use('/user', userRoutes);
 
+
 export default routes;
