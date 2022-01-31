@@ -11,14 +11,21 @@
   },
   "betterScripts": {
     "dev": {
+
       "command": "nodemon --exec ./node_modules/.bin/babel-node ./src/app.js",
+
+      
+
       "env": {
         "NODE_ENV": "development",
         "PORT": 5000
       }
     },
-    "test": {
+    "test": 
       "command": "nodemon --exec ./node_modules/.bin/babel-node ./src/app.js",
+
+      
+
       "env": {
         "NODE_ENV": "test",
         "PORT": 3000
