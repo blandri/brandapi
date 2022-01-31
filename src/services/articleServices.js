@@ -22,8 +22,8 @@ export class ArticleServices {
       article.content = data.content;
     }
 
-    if (data.likes) {
-      article.likes = data.likes;
+    if (data.image) {
+      article.image = data.image;
     }
 
     await article.save();

@@ -3,8 +3,7 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import routes from './routes';
 import 'dotenv/config';
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
 
 const app = express();
 
@@ -29,11 +28,7 @@ const server = async () => {
       });
     }
     app.use(express.json());
-    cloudinary.config({
-      cloud_name: process.env.CLOUD_NAME,
-      api_key: process.env.API_KEY,
-      api_secret: process.env.API_SECRET,
-    });
+    
     app.use('/api/v1/', routes);
     app.listen(port, () => {
       console.log(`The server is running on port ${port}`);
