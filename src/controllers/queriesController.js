@@ -10,9 +10,9 @@ export class QuerryController {
       });
 
       const Querr = await QuerryServices.createQuerry(data);
-      res.send(Querr);
+      res.status(201).send(Querr);
     } catch (error) {
-      res.status(404).send({ error: 'no Querry created yet' });
+      res.status(204).send({ error: 'no Querry created yet' });
     }
   }
 
@@ -21,7 +21,7 @@ export class QuerryController {
       const querries = await QuerryServices.getAllQuerry();
       res.send(querries);
     } catch (error) {
-      res.status(404).send({ error: 'no Querries here' });
+      res.status(204).send({ error: 'no Querries here' });
     }
   }
 
@@ -30,7 +30,7 @@ export class QuerryController {
       const querry = await QuerryServices.getQuerry(req.params.id);
       res.send(querry);
     } catch (error) {
-      res.status(404).send({ error: 'Querry doesnt exist' });
+      res.status(204).send({ error: 'Querry doesnt exist' });
     }
   }
 }

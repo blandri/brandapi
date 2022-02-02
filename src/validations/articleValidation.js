@@ -1,11 +1,35 @@
-import { articleSchema } from './articleSchema';
+import { articleSchema, userSchema } from './articleSchema';
 
 export const articleValidation = async (req, res, next) => {
-  const value = await articleSchema.validate(req.body);
-  if (value.error) {
+  const tit = await articleSchema.validate(req.body);
+  const cont = await articleSchema.validate(req.body);
+  if (tit.error) {
     res.json({
       error: 1,
-      message: 'title must be a string',
+      message: tit.error.details[0].message,
+    });
+  } else if (cont.error) {
+    res.json({
+      error: 1,
+      message: cont.error.details[0].message,
+    });
+  } else {
+    next();
+  }
+};
+
+export const userValideation = async (req, res, next) => {
+  const emeli = await userSchema.validate(req.body);
+  const pass = await userSchema.validate(req.body);
+  if (emeli.error) {
+    res.json({
+      error: 1,
+      message: emeli.error.details[0].message,
+    });
+  } else if (pass.error) {
+    res.json({
+      error: 1,
+      message: pass.error.details[0].message,
     });
   } else {
     next();

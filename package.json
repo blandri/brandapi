@@ -11,21 +11,14 @@
   },
   "betterScripts": {
     "dev": {
-
       "command": "nodemon --exec ./node_modules/.bin/babel-node ./src/app.js",
-
-      
-
       "env": {
         "NODE_ENV": "development",
         "PORT": 5000
       }
     },
-    "test":{
+    "test": {
       "command": "nodemon --exec ./node_modules/.bin/babel-node ./src/app.js",
-
-      
-
       "env": {
         "NODE_ENV": "test",
         "PORT": 3000
@@ -70,6 +63,12 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "coveralls": "^3.1.1",
+    "mocha": "^9.2.0",
+    "nodemon": "^2.0.15",
+    "nyc": "^15.1.0",
+    "sinon": "^13.0.1"
   }
 }

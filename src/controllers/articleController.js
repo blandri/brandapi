@@ -11,9 +11,9 @@ export class ArticleController {
         image: req.file.path,
       });
       const article = await ArticleServices.createArticle(data);
-      res.send(article);
+      res.status(201).send(article);
     } catch (error) {
-      res.status(404);
+      res.status(204);
       res.send({ error: 'No article created' });
     }
   }
@@ -22,8 +22,8 @@ export class ArticleController {
       const articles = await ArticleServices.getAllArticles();
       res.send(articles);
     } catch (error) {
-      res.status(404);
-      res.send({ error: 'Error! try again' });
+      res.status(204);
+      res.send({ error: 'no articles here' });
     }
   }
   async getArticle(req, res, next) {
@@ -50,18 +50,18 @@ export class ArticleController {
       }
 
       const article = await ArticleServices.updateArticle(req.params.id, data);
-      res.send(article);
+      res.status(201).send(article);
     } catch (error) {
-      res.status(404);
+      res.status(204);
       res.send({ error: "Article doesn't exist!" });
     }
   }
   async deleteArticle(req, res, next) {
     try {
       await ArticleServices.deleteArticle(req.params.id);
-      res.status(204).send();
+      res.status(202).send();
     } catch {
-      res.status(404, 'no article');
+      res.status(204, 'no article');
       res.send({ error: "Article doesn't exist!" });
     }
   }
