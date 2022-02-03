@@ -3,16 +3,10 @@ import { QuerryController } from '../../controllers/queriesController';
 
 const route = express.Router();
 
-route.get('/', (req, res) => {
-  new QuerryController().getAllQuerrie(req, res);
-});
+route.get('/', new QuerryController().getAllQuerrie);
 
-route.post('/', (req, res) => {
-  new QuerryController().createQuerry(req, res);
-});
+route.post('/', new QuerryController().createQuerry);
 
-route.get('/id:', (req, res) => {
-  new QuerryController().getQuerry(req, res);
-});
+route.get('/id:', new QuerryController().getQuerry);
 
 export default route;

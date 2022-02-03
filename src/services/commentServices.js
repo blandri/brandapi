@@ -1,7 +1,11 @@
 import Comment from '../models/comment';
 
 export class commentService {
-  async createComment(data) {
+  static async createComment(data) {
     return await data.save();
+  }
+
+  static async getAllComments(id) {
+    return await Comment.findOne({ _id: id });
   }
 }
