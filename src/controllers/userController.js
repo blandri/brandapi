@@ -26,8 +26,8 @@ export class userController {
   async Login(req, res) {
     try {
       const exist = await userExist(req.body.email);
-      const valid = await comparePassword(exist.password, req.body.password);
-      if (exist) {
+      const valid = await comparePassword(req.body.password, exist.password);
+      if (exist && valid) {
         const token = await generateToken({ _id: exist.id });
         res.send({
           status: 200,
