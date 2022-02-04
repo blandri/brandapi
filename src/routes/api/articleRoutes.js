@@ -10,10 +10,10 @@ const articleController = new ArticleController();
 const route = express.Router();
 const storage = multer.diskStorage({});
 
-route.get('/',articleController.getAllArticles);
+route.get('/', articleController.getAllArticles);
 
 route.post(
-  '/',
+  '/' ,
   authenticate,
   upload.single('image'),
   articleValidation,

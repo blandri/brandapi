@@ -1,11 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import multer from 'multer';
+
 import routes from './routes';
 import 'dotenv/config';
 import morgan from 'morgan';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
+
 
 const app = express();
 
