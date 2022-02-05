@@ -22,8 +22,7 @@ export class ArticleController {
       const articles = await ArticleServices.getAllArticles();
       res.send(articles);
     } catch (error) {
-      res.status(204);
-      res.send({ error: 'no articles here' });
+      res.status(204).send({ error: 'no articles here' });
     }
   }
   async getArticle(req, res, next) {
@@ -31,8 +30,7 @@ export class ArticleController {
       const article = await ArticleServices.getArticle(req.params.id);
       res.send(article);
     } catch (error) {
-      res.status(404);
-      res.send({ error: 'Error! try again' });
+      res.status(404).send({ error: 'Error! try again' });
     }
   }
   async updateArticle(req, res, next) {
@@ -45,15 +43,14 @@ export class ArticleController {
         data['content'] = req.body.content;
       }
 
-      if (req.body.likes) {
-        data['likes'] = req.body.likes;
+      if (req.body.image) {
+        data['image'] = req.file.path;
       }
 
       const article = await ArticleServices.updateArticle(req.params.id, data);
       res.status(201).send(article);
     } catch (error) {
-      res.status(204);
-      res.send({ error: "Article doesn't exist!" });
+      res.status(204).send({ error: "Article doesn't exist!" });
     }
   }
   async deleteArticle(req, res, next) {
@@ -61,8 +58,7 @@ export class ArticleController {
       await ArticleServices.deleteArticle(req.params.id);
       res.status(202).send();
     } catch {
-      res.status(204, 'no article');
-      res.send({ error: "Article doesn't exist!" });
+      res.status(204, 'no article').send({ error: "Article doesn't exist!" });
     }
   }
 }

@@ -3,34 +3,48 @@ import mongoose from 'mongoose';
 import multer from 'multer';
 import routes from './routes';
 import 'dotenv/config';
+import morgan from 'morgan';
+import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
 
 const app = express();
 
 const port = process.env.PORT || 3000;
 const mode = process.env.NODE_ENV || 'development';
-const server = async () => {
-  try {
-    if (mode === 'development') {
-      await mongoose.connect(process.env.DEVELOPMENT_DB, {
-        useNewUrlParser: true,
-      });
-    } else if (mode === 'test') {
-      await mongoose.connect(process.env.TEST_DB, {
-        useNewUrlParser: true,
-      });
-    } else if (mode === 'production') {
-      await mongoose.connect(process.env.PRODUCTION_DB, {
-        useNewUrlParser: true,
-      });
-    }
-    app.use(express.json());
 
-    app.use('/api/v1/', routes);
-    app.listen(port, () => {
-      console.log(`The server is running on port ${port}`);
+try {
+  if (mode === 'development') {
+    mongoose.connect(process.env.DEVELOPMENT_DB, {
+      useNewUrlParser: true,
     });
-  } catch (error) {
-    console.log(error);
+  } else if (mode === 'test') {
+    mongoose.connect(process.env.TEST_DB, {
+      useNewUrlParser: true,
+    });
+  } else if (mode === 'production') {
+    mongoose.connect(process.env.PRODUCTION_DB, {
+      useNewUrlParser: true,
+    });
   }
-};
-server();
+  app.use(express.json());
+  app.use(cors());
+  app.use(morgan('dev'));
+
+  app.get('/', (req, res) => {
+    res.send({ message: 'welcome to the api' });
+  });
+  app.get('*', (req, res, next) => {
+    res.status(404).json({
+      error: 'Page not found',
+    });
+  });
+
+  app.use('/api/v1/', routes);
+  app.listen(port, () => {
+    console.log(`The server is running on port ${port}`);
+  });
+} catch (error) {
+  console.log(error);
+}
+
+export default app;
