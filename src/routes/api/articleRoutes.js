@@ -17,7 +17,6 @@ route.post(
   '/',
 
   authenticate,
-
   uploads.single('image'),
   articleValidation,
 
