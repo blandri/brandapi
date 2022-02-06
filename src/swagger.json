@@ -32,8 +32,8 @@
                 {
                     "name": "Authorisation",
                     "in": "header",
-                    "description": "authorization",
-                    "required": true
+                    "description": "authorization"
+                    
                       
                 },
                 {
@@ -58,8 +58,8 @@
                 {
                     "name": "Authorization",
                 "in": "header",
-                "description": "Authorization",
-                "required": true
+                "description": "Authorization"
+                
                 },
               {
                 "name": "Id",
