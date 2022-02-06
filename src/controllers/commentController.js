@@ -14,7 +14,7 @@ export class commentControll {
 
   async getAllComments(req, res) {
     try {
-      const comm = await commentService.getAllComments(req.params.id);
+      const comm = await commentService.getAllComments();
       res.send(comm);
     } catch (error) {
       res.status(401).send({ error: 'no comments sent yet' });
