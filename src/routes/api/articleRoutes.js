@@ -13,7 +13,7 @@ const storage = multer.diskStorage({});
 route.get('/', articleController.getAllArticles);
 
 route.post(
-  '/' ,
+  '/',
   authenticate,
   upload.single('image'),
   articleValidation,
