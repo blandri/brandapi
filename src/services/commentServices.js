@@ -6,6 +6,6 @@ export class commentService {
   }
 
   static async getAllComments(id) {
-    return await Comment.findOne({ _id: id });
+    return await Comment.findOne();
   }
 }

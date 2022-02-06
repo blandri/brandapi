@@ -1,11 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import multer from 'multer';
+
 import routes from './routes';
 import 'dotenv/config';
 import morgan from 'morgan';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
 
 const app = express();
 
@@ -33,11 +34,13 @@ try {
   app.get('/', (req, res) => {
     res.send({ message: 'welcome to the api' });
   });
-  app.get('*', (req, res, next) => {
+  app.get('', (req, res, next) => {
     res.status(404).json({
       error: 'Page not found',
     });
   });
+
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
   app.use('/api/v1/', routes);
   app.listen(port, () => {
