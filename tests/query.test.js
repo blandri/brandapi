@@ -22,6 +22,8 @@ describe('Query end point testing', () => {
   });
   it('Should not create any query', async () => {
     const res = await request(app).post('/api/v1/queries/nnn');
+
     expect(res).to.have.status([201]);
+
   });
 });
