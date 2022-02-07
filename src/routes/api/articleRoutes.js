@@ -16,6 +16,9 @@ route.get('/', articleController.getAllArticles);
 route.post(
   '/',
 
+  authenticate,
+
+
   uploads.single('image'),
   articleValidation,
 
@@ -26,6 +29,10 @@ route.get('/:id', articleController.getArticle);
 
 route.patch(
   '/:id',
+
+  authenticate,
+
+
 
   uploads.single('image'),
   articleController.updateArticle
