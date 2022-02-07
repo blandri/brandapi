@@ -14,6 +14,7 @@
         "url": "http://localhost:8000",
         "name": "PROD"
       }
+     
     ],
     "paths": {
       "/": {
@@ -284,9 +285,6 @@
       }
     }
     
-      }
-    
-      
 
     
     },
@@ -319,7 +317,11 @@
              "name": {
                   "type": "string"
              },
-             "content": {
+
+             "comment": {
+
+             
+
                   "type": "string"
              }
         }
