@@ -9,6 +9,10 @@
       {
         "url": "http://localhost:8000",
         "name": "DEV"
+      },
+      {
+        "url": "http://localhost:8000",
+        "name": "PROD"
       }
       
      
@@ -309,7 +313,6 @@
       }
     }
     
-
     
     },
     
@@ -341,15 +344,7 @@
              "name": {
                   "type": "string"
              },
-
-            
-
-
-             "comment": {
-
-             
-
-
+             "content": {
                   "type": "string"
              }
         }
