@@ -9,6 +9,10 @@
       {
         "url": "http://localhost:8000",
         "name": "DEV"
+      },
+      {
+        "url": "http://localhost:8000",
+        "name": "PROD"
       }
      
     ],
@@ -254,9 +258,10 @@
             }
           }
         }
+
       },
     "/api/v1/comment/{articleid}":{
-      
+
       "post":{
         "tags":["comments"],
         "summary":"Create comment",
@@ -287,8 +292,10 @@
       },
       "get":{
         "tags":["comments"],
+
         "summary":"get comments of an article",
         "description":"get comments",
+
           "operationId":"getComments",
         "parameters":[
           {
@@ -305,6 +312,7 @@
       }
     }
     
+
     
     },
     
@@ -336,7 +344,15 @@
              "name": {
                   "type": "string"
              },
+
+            
+
+
              "comment": {
+
+             
+
+
                   "type": "string"
              }
         }

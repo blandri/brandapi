@@ -4,6 +4,7 @@ import { commentService } from '../services/commentServices';
 
 export class commentControll {
   async createComment(req, res) {
+
     try {
       const data = new Comment({
         articleId: req.params.articleid,
@@ -13,8 +14,10 @@ export class commentControll {
       const comm = await commentService.createComment(data);
       res.send(comm);
     } catch (error) {
+
       res.status(204).send({ error: 'failed to create' });
     }
+
   }
 
   async getComment(req, res) {
