@@ -32,9 +32,9 @@
                 {
                     "name": "Authorisation",
                     "in": "header",
-                    "description": "authorization",
-                    "required": true,
-                    "type":"string"  
+                    "description": "authorization"
+                    
+                      
                 },
                 {
                   "name": "id",
@@ -58,8 +58,8 @@
                 {
                     "name": "Authorization",
                 "in": "header",
-                "description": "Authorization",
-                "required": true
+                "description": "Authorization"
+                
                 },
               {
                 "name": "Id",
@@ -231,49 +231,10 @@
             }
           }
         }
-      },
+      }
     
-      "/api/v1/comment/{id}":{
-        "post":{
-            "tags":["comments"],
-            "parameters": [
-                {
-                    "name": "article id",
-                "in": "path",
-                "description": "article id",
-                "required": true
-                },
-                {
-                    "name": "name",
-                "in": "form data",
-                "description": "name",
-                "required": true
-                },
-                {
-                    "name": "comment",
-                "in": "form data",
-                "description": "comment",
-                "required": true
-                }
-            ],
-            "responses":{
-                 "200":{
-                     "description":"successful"
-                 }
-            }
-        }
-        
-    },
-    "/api/v1/comment":{
-        "get":{
-            "tags":["comments"],
-            "responses":{
-                "200":{
-                    "description":"successful"
-                }
-           }
-        }
-    }
+      
+    
     },
     
     "definitions": {

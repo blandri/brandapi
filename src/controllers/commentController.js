@@ -5,6 +5,7 @@ import { commentService } from '../services/commentServices';
 export class commentControll {
   async createComment(req, res) {
     const data = new Comment({
+      articleId: req.params.articleid,
       name: req.body.name,
       comment: req.body.comment,
     });
@@ -12,9 +13,9 @@ export class commentControll {
     res.send(comm);
   }
 
-  async getAllComments(req, res) {
+  async getComment(req, res) {
     try {
-      const comm = await commentService.getAllComments();
+      const comm = await commentService.getComment(req.params.articleid);
       res.send(comm);
     } catch (error) {
       res.status(401).send({ error: 'no comments sent yet' });
