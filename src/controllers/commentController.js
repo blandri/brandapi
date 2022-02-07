@@ -13,7 +13,7 @@ export class commentControll {
       const comm = await commentService.createComment(data);
       res.send(comm);
     } catch (error) {
-      res.status(404).send({ error: 'failed to create' });
+      res.status(204).send({ error: 'failed to create' });
     }
   }
 

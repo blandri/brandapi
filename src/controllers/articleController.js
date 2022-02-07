@@ -37,6 +37,7 @@ export class ArticleController {
   }
   async updateArticle(req, res, next) {
     try {
+      req.body.image = await uploadFile(req);
       const data = {};
       if (req.body.title) {
         data['title'] = req.body.title;
@@ -46,7 +47,7 @@ export class ArticleController {
       }
 
       if (req.body.image) {
-        data['image'] = req.file.path;
+        data['image'] = req.file.image;
       }
 
       const article = await ArticleServices.updateArticle(req.params.id, data);
@@ -58,7 +59,7 @@ export class ArticleController {
   async deleteArticle(req, res, next) {
     try {
       await ArticleServices.deleteArticle(req.params.id);
-      res.status(202).send({message:"deleted successfully"});
+      res.status(202).send({ message: 'deleted successfully' });
     } catch {
       res.status(204, 'no article').send({ error: "Article doesn't exist!" });
     }

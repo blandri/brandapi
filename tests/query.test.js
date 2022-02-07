@@ -14,7 +14,7 @@ describe('Query end point testing', () => {
   });
   it('Should not retrieve any query', async () => {
     const res = await request(app).get('/api/v1/queries/uuuuu');
-    expect(res).to.have.status([204]);
+    expect(res).to.have.status([404]);
   });
   it('Should create a new query', async () => {
     const res = await request(app).post('/api/v1/queries/');
@@ -22,6 +22,6 @@ describe('Query end point testing', () => {
   });
   it('Should not create any query', async () => {
     const res = await request(app).post('/api/v1/queries/nnn');
-    expect(res).to.have.status([201]);
+    expect(res).to.have.status([404]);
   });
 });

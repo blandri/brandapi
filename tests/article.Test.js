@@ -30,7 +30,7 @@ describe('Articles end point testing', () => {
   });
   it('Should not delete article', async () => {
     const res = await request(app).delete('/api/v1/aritcle/kkkkk');
-    expect(res).to.have.status([204]);
+    expect(res).to.have.status([404]);
   });
 
   it('Should edit article', async () => {
@@ -38,7 +38,7 @@ describe('Articles end point testing', () => {
     expect(res).to.have.status([201]);
   });
   it('Should not edit article', async () => {
-    const res = await request(app).patch('/api/v1/aritcle/:art');
-    expect(res).to.have.status([204]);
+    const res = await request(app).patch('/api/v1/aritcle/jii');
+    expect(res).to.have.status([404]);
   });
 });

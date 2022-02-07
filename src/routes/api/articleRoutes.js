@@ -31,6 +31,6 @@ route.patch(
   articleController.updateArticle
 );
 
-route.delete('/:id', articleController.deleteArticle);
+route.delete('/:id', authenticate, articleController.deleteArticle);
 
 export default route;
