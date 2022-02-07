@@ -32,7 +32,27 @@
       },
       
       "/api/v1/articles/{id}":{
+        "get":{
+          "tags":["articleed"],
+          "summary":"get a single article",
+          "description":"get single article",
+          "parameters":[
+            {
+              "name":"id",
+              "in":"path"
+
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"successful"
+            }
+          }
+        },
           "delete":{
+            "tags":["articleed"],
+            "summary":"delete article",
+            "description":"delete article",
             "parameters": [
                 {
                     "name": "Authorisation",
@@ -57,8 +77,10 @@
               }
           },
           "patch":{
-            
-            
+            "tags":["articleed"],
+            "summary":"edit article",
+            "description":"edit article",
+            "operationid":"edit article",
             "parameters": [
                 {
                     "name": "Authorization",
@@ -239,6 +261,7 @@
 
       },
     "/api/v1/comment/{articleid}":{
+
       "post":{
         "tags":["comments"],
         "summary":"Create comment",
@@ -269,6 +292,10 @@
       },
       "get":{
         "tags":["comments"],
+
+        "summary":"get comments of an article",
+        "description":"get comments",
+
           "operationId":"getComments",
         "parameters":[
           {
@@ -318,9 +345,13 @@
                   "type": "string"
              },
 
+            
+
+
              "comment": {
 
              
+
 
                   "type": "string"
              }

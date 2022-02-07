@@ -16,15 +16,6 @@ export class QuerryController {
     }
   }
 
-  async getAllQuerrie(req, res) {
-    try {
-      const querries = await QuerryServices.getAllQuerry();
-      res.send(querries);
-    } catch (error) {
-      res.status(204).send({ error: 'no Querries here' });
-    }
-  }
-
   async getQuerry(req, res) {
     try {
       const querry = await QuerryServices.getQuerry(req.params.id);
