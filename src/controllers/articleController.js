@@ -58,7 +58,7 @@ export class ArticleController {
   async deleteArticle(req, res, next) {
     try {
       await ArticleServices.deleteArticle(req.params.id);
-      res.status(202).send();
+      res.status(202).send({message:"deleted successfully"});
     } catch {
       res.status(204, 'no article').send({ error: "Article doesn't exist!" });
     }

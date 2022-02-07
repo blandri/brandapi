@@ -9,6 +9,10 @@
       {
         "url": "http://localhost:8000",
         "name": "DEV"
+      },
+      {
+        "url": "http://localhost:8000",
+        "name": "PROD"
       }
     ],
     "paths": {
@@ -62,7 +66,7 @@
                 
                 },
               {
-                "name": "Id",
+                "name": "id",
                 "in": "path",
                 "description": "id",
                 "required": true
@@ -231,9 +235,59 @@
             }
           }
         }
+
+      },
+    "/api/v1/comment/{articleid}":{
+      "post":{
+        "tags":["comments"],
+        "summary":"Create comment",
+        "description":"Post comment",
+        "operationId":"postComment",
+        "parameters":[
+          {
+            "name":"articleid",
+            "in":"path",
+            "description":"articleid",
+            "type":"string"
+          },
+          {
+            "name":"name",
+            "in":"body",
+            "description":"name",
+            "schema":{
+              "$ref":"#/definitions/comments"
+            }
+          }
+          
+        ],
+        "responses":{
+          "201":{
+            "description":"sent successfully"
+          }
+        }
+      },
+      "get":{
+        "tags":["comments"],
+          "operationId":"getComments",
+        "parameters":[
+          {
+            "name":"articleid",
+            "in":"path",
+            "type":"string"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"successful"
+          }
+        }
+      }
+    }
+    
       }
     
       
+
     
     },
     
@@ -259,7 +313,18 @@
             "type": "string"
           }
         }
-      },
+      }, "comments": {
+        "type": "object",
+        "properties": {
+             "name": {
+                  "type": "string"
+             },
+             "content": {
+                  "type": "string"
+             }
+        }
+   },
+
       "querie":{
         "type": "object",
         "properties": {
