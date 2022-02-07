@@ -1,14 +1,16 @@
 import Article from '../models/article';
 import { ArticleServices } from '../services/articleServices';
+import { uploadFile } from '../helpers/fileUpload';
 
 export class ArticleController {
   // TODO Don't access database from this file you only needs
   async createArticle(req, res, next) {
     try {
+      req.body.image = await uploadFile(req);
       const data = new Article({
         title: req.body.title,
         content: req.body.content,
-        image: req.file.path,
+        image: req.body.image,
       });
       const article = await ArticleServices.createArticle(data);
       res.status(201).send(article);
