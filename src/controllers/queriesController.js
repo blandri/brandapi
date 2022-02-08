@@ -16,12 +16,12 @@ export class QuerryController {
     }
   }
 
-  async getQuerry(req, res) {
+  async getAllQuerry(req, res) {
     try {
-      const querry = await QuerryServices.getQuerry(req.params.id);
+      const querry = await QuerryServices.getAllQuerry();
       res.send(querry);
     } catch (error) {
-      res.status(204).send({ error: 'Querry doesnt exist' });
+      res.status(204).send({ error: 'no querries here' });
     }
   }
 }
