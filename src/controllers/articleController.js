@@ -1,14 +1,16 @@
 import Article from '../models/article';
 import { ArticleServices } from '../services/articleServices';
+import { uploadFile } from '../helpers/fileUpload';
 
 export class ArticleController {
   // TODO Don't access database from this file you only needs
   async createArticle(req, res, next) {
     try {
+      req.body.image = await uploadFile(req);
       const data = new Article({
         title: req.body.title,
         content: req.body.content,
-        image: req.file.path,
+        image: req.body.image,
       });
       const article = await ArticleServices.createArticle(data);
       res.status(201).send(article);
@@ -35,6 +37,7 @@ export class ArticleController {
   }
   async updateArticle(req, res, next) {
     try {
+      req.body.image = await uploadFile(req);
       const data = {};
       if (req.body.title) {
         data['title'] = req.body.title;
@@ -44,7 +47,7 @@ export class ArticleController {
       }
 
       if (req.body.image) {
-        data['image'] = req.file.path;
+        data['image'] = req.file.image;
       }
 
       const article = await ArticleServices.updateArticle(req.params.id, data);
@@ -56,7 +59,9 @@ export class ArticleController {
   async deleteArticle(req, res, next) {
     try {
       await ArticleServices.deleteArticle(req.params.id);
-      res.status(202).send();
+
+      res.status(202).send({message:"deleted successfully"});
+
     } catch {
       res.status(204, 'no article').send({ error: "Article doesn't exist!" });
     }

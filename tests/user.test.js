@@ -14,6 +14,15 @@ describe('Users end point testing', () => {
   });
 
   it('Should not sign you up', async () => {
+    const res = await request(app).post('/api/v1/user/register/');
+    expect(res).to.have.status([406]);
+  });
+
+  it('Should log you in', async () => {
+    const res = await request(app).post('/api/v1/user/login/');
+    expect(res).to.have.status([200]);
+  });
+  it('Should not log you in', async () => {
     const res = await request(app).post('/api/v1/user/login/');
     expect(res).to.have.status([401]);
   });

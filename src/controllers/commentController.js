@@ -4,17 +4,25 @@ import { commentService } from '../services/commentServices';
 
 export class commentControll {
   async createComment(req, res) {
-    const data = new Comment({
-      name: req.body.name,
-      comment: req.body.comment,
-    });
-    const comm = await commentService.createComment(data);
-    res.send(comm);
+
+    try {
+      const data = new Comment({
+        articleId: req.params.articleid,
+        name: req.body.name,
+        comment: req.body.comment,
+      });
+      const comm = await commentService.createComment(data);
+      res.send(comm);
+    } catch (error) {
+
+      res.status(204).send({ error: 'failed to create' });
+    }
+
   }
 
-  async getAllComments(req, res) {
+  async getComment(req, res) {
     try {
-      const comm = await commentService.getAllComments(req.params.id);
+      const comm = await commentService.getComment(req.params.articleid);
       res.send(comm);
     } catch (error) {
       res.status(401).send({ error: 'no comments sent yet' });

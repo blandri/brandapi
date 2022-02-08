@@ -1,4 +1,5 @@
-import { articleSchema, userSchema } from './articleSchema';
+import res from 'express/lib/response';
+import { articleSchema, commentSchema, userSchema } from './articleSchema';
 
 export const articleValidation = async (req, res, next) => {
   const tit = await articleSchema.validate(req.body);
@@ -33,5 +34,22 @@ export const userValideation = async (req, res, next) => {
     });
   } else {
     next();
+  }
+};
+
+export const commentValidation = async () => {
+  const name = await commentSchema.validate(req.body);
+  const comment = await commentSchema.validate(req.body);
+
+  if (name.error) {
+    res.json({
+      error: 1,
+      message: name.error.details[0].message,
+    });
+  } else if (comment.error) {
+    res.json({
+      error: 1,
+      message: comment.error.details[0].message,
+    });
   }
 };
