@@ -11,8 +11,5 @@ export class QuerryServices {
     return querries;
   }
 
-  static async getQuerry() {
-    const querry = await Querry.find({ _id: id });
-    return querry;
-  }
+  
 }

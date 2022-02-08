@@ -1,29 +1,56 @@
-import { expect, request, use } from 'chai';
+import chai from 'chai';
 import chaiHttp from 'chai-http';
-import 'dotenv/config';
-import res from 'express/lib/response';
 import app from '../src/app';
+import User from '../src/models/user';
+import { generateToken } from '../src/helpers/jwtFunctions';
 
-use(chaiHttp);
+chai.use(chaiHttp);
 
-describe('Users end point testing', () => {
-  it('should sign you up', async () => {
-    const res = await request(app).post('/api/v1/user/register/');
-    expect(res).to.have.status([406]);
-    expect(res.type).to.have.equal('application/json');
+describe('TESTING USER ROUTE', () => {
+  let testSchema = new User({
+    email: 'landry@gmail.com',
+    password: '123',
   });
 
-  it('Should not sign you up', async () => {
-    const res = await request(app).post('/api/v1/user/register/');
-    expect(res).to.have.status([406]);
+  before(async () => {
+    await testSchema.save();
   });
 
-  it('Should log you in', async () => {
-    const res = await request(app).post('/api/v1/user/login/');
-    expect(res).to.have.status([200]);
+  describe('LOG IN ROUTE', () => {
+    it('user login in with no email', async () => {
+      const res = await chai.request(app).post('/api/v1/user/login').send({
+        email: '',
+        password: '123',
+      });
+      chai.expect(res.status).to.be.eq(200);
+      //chai.expect(res.body.error).to.be.eq('invalid credentials');
+    });
+
+    it('user log in with no password', async () => {
+      const res = await chai.request(app).post('/api/v1/user/login').send({
+        email: 'landry@gmail.com',
+        password: '',
+      });
+      chai.expect(res.status).to.be.eq(200);
+      //chai.expect(res.body.error).to.be.eq('invalid credentials');
+    });
   });
-  it('Should not log you in', async () => {
-    const res = await request(app).post('/api/v1/user/login/');
-    expect(res).to.have.status([401]);
+
+  describe('SIGIN VALIDATION', () => {
+    it('it shoud check email validation', async () => {
+      const res = await chai.request(app).post('/api/v1/user/login').send({
+        email: 'landrygmail.com',
+        password: '123',
+      });
+      chai.expect(res.status).to.be.eq(200);
+    });
+
+    it('it shoud check password validation', async () => {
+      const res = await chai.request(app).post('/api/v1/user/login').send({
+        email: 'landry@gmail.com',
+        password: '12',
+      });
+      chai.expect(res.status).to.be.eq(200);
+    });
   });
 });

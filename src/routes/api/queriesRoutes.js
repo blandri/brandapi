@@ -5,6 +5,6 @@ const route = express.Router();
 
 route.post('/', new QuerryController().createQuerry);
 
-route.get('/id:', new QuerryController().getQuerry);
+route.get('/', new QuerryController().getAllQuerry);
 
 export default route;

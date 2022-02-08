@@ -13,7 +13,7 @@ route.post('/register', userValideation, (req, res, next) => {
   new userController().createUser(req, res);
 });
 
-route.post('/login', (req, res, next) => {
+route.post('/login', userValideation, (req, res, next) => {
   new userController().Login(req, res);
 });
 
