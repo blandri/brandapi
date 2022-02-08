@@ -257,7 +257,6 @@
 
       },
     "/api/v1/comment/{articleid}":{
-
       "post":{
         "tags":["comments"],
         "summary":"Create comment",
