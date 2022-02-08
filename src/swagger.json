@@ -10,7 +10,6 @@
         "url": "http://localhost:8000",
         "name": "DEV"
       }
-      
      
     ],
     "paths": {
@@ -258,7 +257,6 @@
 
       },
     "/api/v1/comment/{articleid}":{
-
       "post":{
         "tags":["comments"],
         "summary":"Create comment",
@@ -309,7 +307,6 @@
       }
     }
     
-
     
     },
     
@@ -341,15 +338,7 @@
              "name": {
                   "type": "string"
              },
-
-            
-
-
              "comment": {
-
-             
-
-
                   "type": "string"
              }
         }
