@@ -24,4 +24,13 @@ export class QuerryController {
       res.status(204).send({ error: 'no querries here' });
     }
   }
+
+  async deleteQuerry(req, res) {
+    try {
+      const quer = await QuerryServices.deleteQuerry(req.params.id);
+      res.send({ status: 200, message: 'deleted successfully' });
+    } catch (error) {
+      res.status(404).send({ error: 'failed' });
+    }
+  }
 }

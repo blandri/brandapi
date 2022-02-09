@@ -1,4 +1,5 @@
 import res from 'express/lib/response';
+import { Query } from 'mongoose';
 import Querry from '../models/query';
 
 export class QuerryServices {
@@ -11,5 +12,8 @@ export class QuerryServices {
     return querries;
   }
 
-  
+  static async deleteQuerry(id) {
+    const quer = await Querry.deleteOne({_id:id});
+    return quer;
+  }
 }

@@ -7,4 +7,6 @@ route.post('/', new QuerryController().createQuerry);
 
 route.get('/', new QuerryController().getAllQuerry);
 
+route.delete('/:id', new QuerryController().deleteQuerry);
+
 export default route;

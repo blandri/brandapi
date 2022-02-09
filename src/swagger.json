@@ -30,7 +30,7 @@
       
       "/api/v1/articles/{id}":{
         "get":{
-          "tags":["articleed"],
+          "tags":["Articles"],
           "summary":"get a single article",
           "description":"get single article",
           "parameters":[
@@ -47,16 +47,14 @@
           }
         },
           "delete":{
-            "tags":["articleed"],
+            "tags":["Articles"],
             "summary":"delete article",
             "description":"delete article",
             "parameters": [
                 {
-                    "name": "Authorisation",
-                    "in": "header",
-                    "description": "authorization"
-                    
-                      
+                  "name":"Authorization",
+                  "description":"Authorization",
+                  "in":"header"
                 },
                 {
                   "name": "id",
@@ -74,7 +72,7 @@
               }
           },
           "patch":{
-            "tags":["articleed"],
+            "tags":["Articles"],
             "summary":"edit article",
             "description":"edit article",
             "operationid":"edit article",
@@ -116,6 +114,20 @@
                   "description": "Edited"
                 }
               }
+        }
+      },
+      "/api/v1/queries/{id}":{
+        "delete":{
+          "tags": ["Queries"],
+            "summary": "Delete querie",
+            "description": "Delete querie",
+            "operationId": "deletequerie",
+            "parameters":[
+              {
+                "name":"Query id",
+                "in":"formData"
+              }
+            ]
         }
       },
       "/api/v1/queries":{

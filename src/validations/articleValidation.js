@@ -37,7 +37,7 @@ export const userValideation = async (req, res, next) => {
   }
 };
 
-export const commentValidation = async () => {
+export const commentValidation = async (req, res, next) => {
   const name = await commentSchema.validate(req.body);
   const comment = await commentSchema.validate(req.body);
 
