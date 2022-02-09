@@ -7,7 +7,7 @@
     },
     "servers": [
       {
-        "url": "http://localhost:8000",
+        "url": "http://localhost:5000",
         "name": "DEV"
       }
       
@@ -215,46 +215,40 @@
             }
           }
         },
-        
-        
-        "post": {
-          "tags": ["Articles"],
-          "summary": "Create article",
-          "description": "Create article",
-          "operationId": "postArticles",
-          "parameters": [
+        "post":{
+          "tags":["Articles"],
+          "summary":"Create artcile",
+          "parameters":[
             {
-              "name": "Authorization",
-              "in": "header",
-              "description": "Authorization",
-              "required": true
+              "name":"Authorization",
+              "in":"Header"
+              
             },
             {
-              "name": "title",
-              "in": "formData",
-              "description": "title",
-              "required": true
+              "name":"title",
+              "in":"formData",
+              "required":true
             },
             {
-              "name": "content",
-              "in": "formData",
-              "description": "content",
-              "required": true
+              "name":"content",
+              "in":"formData",
+              "required":true
             },
             {
-              "name": "image",
-              "in": "formData",
-              "type": "file",
-              "description": "image",
-              "required": true
+              "name":"image",
+              "in":"formData",
+              "type":"file"
+              
             }
           ],
-          "responses": {
-            "200": {
-              "description": "p0st successful"
+          "responses":{
+            "200":{
+              "description":"created successfully"
             }
           }
         }
+        
+        
 
       },
     "/api/v1/comment/{articleid}":{

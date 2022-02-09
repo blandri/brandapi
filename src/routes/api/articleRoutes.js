@@ -28,17 +28,11 @@ route.get('/:id', articleController.getArticle);
 
 route.patch(
   '/:id',
-
-  authenticate,
-
-
-  
-
-
+authenticate,
   uploads.single('image'),
   articleController.updateArticle
 );
 
-route.delete('/:id', articleController.deleteArticle);
+route.delete('/:id',authenticate, articleController.deleteArticle);
 
 export default route;
