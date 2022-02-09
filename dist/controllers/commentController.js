@@ -5,7 +5,7 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.QuerryController = void 0;
+exports.commentControll = void 0;
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
@@ -15,35 +15,36 @@ var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/cl
 
 var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _query = _interopRequireDefault(require("../models/query"));
+var _comment = _interopRequireDefault(require("../models/comment"));
 
-var _querryServices = require("../services/querryServices");
+var _commentServices = require("../services/commentServices");
 
-var QuerryController = /*#__PURE__*/function () {
-  function QuerryController() {
-    (0, _classCallCheck2["default"])(this, QuerryController);
+var commentControll = /*#__PURE__*/function () {
+  function commentControll() {
+    (0, _classCallCheck2["default"])(this, commentControll);
   }
 
-  (0, _createClass2["default"])(QuerryController, [{
-    key: "createQuerry",
+  (0, _createClass2["default"])(commentControll, [{
+    key: "createComment",
     value: function () {
-      var _createQuerry = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
-        var data, Querr;
+      var _createComment = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
+        var data, comm;
         return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                data = new _query["default"]({
-                  email: req.body.email,
-                  message: req.body.message
+                data = new _comment["default"]({
+                  articleId: req.params.articleid,
+                  name: req.body.name,
+                  comment: req.body.comment
                 });
                 _context.next = 4;
-                return _querryServices.QuerryServices.createQuerry(data);
+                return _commentServices.commentService.createComment(data);
 
               case 4:
-                Querr = _context.sent;
-                res.status(201).send(Querr);
+                comm = _context.sent;
+                res.send(comm);
                 _context.next = 11;
                 break;
 
@@ -51,7 +52,7 @@ var QuerryController = /*#__PURE__*/function () {
                 _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 res.status(204).send({
-                  error: 'no Querry created yet'
+                  error: 'failed to create'
                 });
 
               case 11:
@@ -62,36 +63,36 @@ var QuerryController = /*#__PURE__*/function () {
         }, _callee, null, [[0, 8]]);
       }));
 
-      function createQuerry(_x, _x2) {
-        return _createQuerry.apply(this, arguments);
+      function createComment(_x, _x2) {
+        return _createComment.apply(this, arguments);
       }
 
-      return createQuerry;
+      return createComment;
     }()
   }, {
-    key: "getAllQuerry",
+    key: "getComment",
     value: function () {
-      var _getAllQuerry = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
-        var querry;
+      var _getComment = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
+        var comm;
         return _regenerator["default"].wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.prev = 0;
                 _context2.next = 3;
-                return _querryServices.QuerryServices.getAllQuerry();
+                return _commentServices.commentService.getComment(req.params.articleid);
 
               case 3:
-                querry = _context2.sent;
-                res.send(querry);
+                comm = _context2.sent;
+                res.send(comm);
                 _context2.next = 10;
                 break;
 
               case 7:
                 _context2.prev = 7;
                 _context2.t0 = _context2["catch"](0);
-                res.status(204).send({
-                  error: 'no querries here'
+                res.status(401).send({
+                  error: 'no comments sent yet'
                 });
 
               case 10:
@@ -102,14 +103,14 @@ var QuerryController = /*#__PURE__*/function () {
         }, _callee2, null, [[0, 7]]);
       }));
 
-      function getAllQuerry(_x3, _x4) {
-        return _getAllQuerry.apply(this, arguments);
+      function getComment(_x3, _x4) {
+        return _getComment.apply(this, arguments);
       }
 
-      return getAllQuerry;
+      return getComment;
     }()
   }]);
-  return QuerryController;
+  return commentControll;
 }();
 
-exports.QuerryController = QuerryController;
+exports.commentControll = commentControll;

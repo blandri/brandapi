@@ -1,0 +1,367 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "API",
+      "description": "API",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:5000",
+        "name": "DEV"
+      }
+      
+     
+    ],
+    "paths": {
+      "/": {
+        "get": {
+          "tags": ["Home"],
+          "summary": "Home",
+          "description": "Home",
+          "operationId": "getHome",
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      
+      "/api/v1/articles/{id}":{
+        "get":{
+          "tags":["articleed"],
+          "summary":"get a single article",
+          "description":"get single article",
+          "parameters":[
+            {
+              "name":"id",
+              "in":"path"
+
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"successful"
+            }
+          }
+        },
+          "delete":{
+            "tags":["articleed"],
+            "summary":"delete article",
+            "description":"delete article",
+            "parameters": [
+                {
+                    "name": "Authorisation",
+                    "in": "header",
+                    "description": "authorization"
+                    
+                      
+                },
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Id",
+                  "required": true,
+                  "type":"string"
+                }
+                
+              ],
+              "responses":{
+                  "200":{
+                      "description":"deleted successful"
+                  }
+              }
+          },
+          "patch":{
+            "tags":["articleed"],
+            "summary":"edit article",
+            "description":"edit article",
+            "operationid":"edit article",
+            "parameters": [
+                {
+                    "name": "Authorization",
+                "in": "header",
+                "description": "Authorization"
+                
+                },
+              {
+                "name": "id",
+                "in": "path",
+                "description": "id",
+                "required": true
+              },
+              {
+                "name": "title",
+                "in": "formData",
+                "description": "title",
+                "required": true
+              },
+              {
+                "name": "content",
+                "in": "formData",
+                "description": "content",
+                "required": true
+              },
+              {
+                "name": "image",
+                "in": "formData",
+                "type": "file",
+                "description": "image",
+                "required": true
+              }
+            ],
+            "responses": {
+                "200": {
+                  "description": "Edited"
+                }
+              }
+        }
+      },
+      "/api/v1/queries":{
+          "post":{
+            "tags": ["Queries"],
+            "summary": "Create querie",
+            "description": "Create querie",
+            "operationId": "postquerie",
+            "parameters": [
+              {
+                "name": "body",
+                "in": "body",
+                "description": "Authorization",
+                "required": true,
+                "schema":{
+                    "$ref":"#/definitions/querie"
+                }
+              }
+              
+            ],
+            "responses":{
+                "200":{
+                    "description":"successful"
+                }
+            }
+        },
+        "get": {
+            "tags": ["Queries"],
+            "summary": "Get all queries",
+            "description": "Get all queries",
+            "operationId": "getQueries",
+            "responses": {
+              "200": {
+                "description": "Success"
+              }
+            }
+          }
+      },
+      "/api/v1/user/register":{
+          "post":{
+            "tags": ["Users"],
+            "summary": "Sign up",
+            "description": "Sign up",
+            "operationId": "postUsersSignup",
+            "parameters": [
+              {
+                "name": "body",
+                "in": "body",
+                "description": "sign up",
+                "required": true,
+                "schema": {
+                  "$ref": "#/definitions/sign up"
+                }
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "Success"
+              }
+            }
+          }
+      },
+      "/api/v1/user/login": {
+        "post": {
+          "tags": ["Users"],
+          "summary": "Login",
+          "description": "Login",
+          "operationId": "postUsersLogin",
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Login",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Login"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      
+      "/api/v1/articles": {
+        "get": {
+          "tags": ["Articles"],
+          "summary": "Get all articles",
+          "description": "Get all articles",
+          "operationId": "getArticles",
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        },
+        "post":{
+          "tags":["Articles"],
+          "summary":"Create artcile",
+          "parameters":[
+            {
+              "name":"Authorization",
+              "in":"Header"
+              
+            },
+            {
+              "name":"title",
+              "in":"formData",
+              "required":true
+            },
+            {
+              "name":"content",
+              "in":"formData",
+              "required":true
+            },
+            {
+              "name":"image",
+              "in":"formData",
+              "type":"file"
+              
+            }
+          ],
+          "responses":{
+            "200":{
+              "description":"created successfully"
+            }
+          }
+        }
+        
+        
+
+      },
+    "/api/v1/comment/{articleid}":{
+
+      "post":{
+        "tags":["comments"],
+        "summary":"Create comment",
+        "description":"Post comment",
+        "operationId":"postComment",
+        "parameters":[
+          {
+            "name":"articleid",
+            "in":"path",
+            "description":"articleid",
+            "type":"string"
+          },
+          {
+            "name":"name",
+            "in":"body",
+            "description":"name",
+            "schema":{
+              "$ref":"#/definitions/comments"
+            }
+          }
+          
+        ],
+        "responses":{
+          "201":{
+            "description":"sent successfully"
+          }
+        }
+      },
+      "get":{
+        "tags":["comments"],
+
+        "summary":"get comments of an article",
+        "description":"get comments",
+
+          "operationId":"getComments",
+        "parameters":[
+          {
+            "name":"articleid",
+            "in":"path",
+            "type":"string"
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"successful"
+          }
+        }
+      }
+    }
+    
+
+    
+    },
+    
+    "definitions": {
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "sign up":{
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      }, "comments": {
+        "type": "object",
+        "properties": {
+             "name": {
+                  "type": "string"
+             },
+
+            
+
+
+             "comment": {
+
+             
+
+
+                  "type": "string"
+             }
+        }
+   },
+
+      "querie":{
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+  
+
+  

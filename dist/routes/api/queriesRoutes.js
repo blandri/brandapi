@@ -9,14 +9,11 @@ exports["default"] = void 0;
 
 var _express = _interopRequireDefault(require("express"));
 
+var _queriesController = require("../../controllers/queriesController");
+
 var route = _express["default"].Router();
 
-route.get('/', function (req, res, next) {
-  res.status(200).json({
-    status: 200,
-    message: "this will return all queries",
-    data: ""
-  });
-});
+route.post('/', new _queriesController.QuerryController().createQuerry);
+route.get('/', new _queriesController.QuerryController().getAllQuerry);
 var _default = route;
 exports["default"] = _default;
