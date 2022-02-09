@@ -17,11 +17,14 @@ var _queriesRoutes = _interopRequireDefault(require("./api/queriesRoutes"));
 
 var _userRoutes = _interopRequireDefault(require("./api/userRoutes"));
 
+var _commentRoutes = _interopRequireDefault(require("./api/commentRoutes"));
+
 var routes = _express["default"].Router();
 
 routes.use('/', _welcomeRoutes["default"]);
-routes.use('/aritcles', _articleRoutes["default"]);
+routes.use('/articles', _articleRoutes["default"]);
 routes.use('/queries', _queriesRoutes["default"]);
 routes.use('/user', _userRoutes["default"]);
+routes.use('/comment', _commentRoutes["default"]);
 var _default = routes;
 exports["default"] = _default;

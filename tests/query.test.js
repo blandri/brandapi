@@ -28,6 +28,7 @@ describe('QUERIES END POINTS', () => {
     });
   });
 
+
   /*it('it should not get any query without authentication', async () => {
       const res = await chai
         .request(app)
@@ -53,6 +54,7 @@ describe('QUERIES END POINTS', () => {
       message: '',
     });
     chai.expect(res.status).to.be.eq(404);
+
   });
 
   /*describe('DELETE QUERY', () => {

@@ -2,95 +2,73 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
 
 var _express = _interopRequireDefault(require("express"));
 
 var _mongoose = _interopRequireDefault(require("mongoose"));
 
-var _routes = _interopRequireDefault(require("./routes"));
+var _index = _interopRequireDefault(require("./routes/index.js"));
+
+var _cors = _interopRequireDefault(require("cors"));
+
+var _morgan = _interopRequireDefault(require("morgan"));
+
+var _swaggerUiExpress = _interopRequireDefault(require("swagger-ui-express"));
+
+var _swagger = _interopRequireDefault(require("./swagger.json"));
 
 require("dotenv/config");
 
 var app = (0, _express["default"])();
 var port = process.env.PORT || 3000;
-var mode = process.env.NODE_ENV || 'development';
+var mode = process.env.NODE_ENV || "development";
 
-var server = /*#__PURE__*/function () {
-  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-    return _regenerator["default"].wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.prev = 0;
+try {
+  if (mode === "development") {
+    _mongoose["default"].connect(process.env.DEVELOPMENT_DB, {
+      useNewUrlParser: true
+    }).then(function (res) {
+      console.log("DEV DB CONNECTED");
+    });
+  } else if (mode === "test") {
+    _mongoose["default"].connect(process.env.TEST_DB, {
+      useNewUrlParser: true
+    }).then(function (res) {
+      console.log("TEST DB CONNECTED");
+    });
+  } else if (mode === "production") {
+    _mongoose["default"].connect(process.env.PRODUCTION_DB, {
+      useNewUrlParser: true
+    }).then(function (res) {
+      console.log("PROD DB CONNECTED");
+    });
+  }
 
-            if (!(mode === 'development')) {
-              _context.next = 6;
-              break;
-            }
+  app.use(_express["default"].json());
+  app.use((0, _cors["default"])());
+  app.use((0, _morgan["default"])("dev"));
+  app.get("/", function (req, res) {
+    res.json({
+      message: "Welcome to the API"
+    });
+  });
+  app.use("/api/v1/", _index["default"]);
+  app.use("/api-docs", _swaggerUiExpress["default"].serve, _swaggerUiExpress["default"].setup(_swagger["default"]));
+  app.use("*", function (req, res, next) {
+    res.status(404).json({
+      error: "NOT FOUND"
+    });
+  });
+  app.listen(port, function () {
+    console.log("The server is running on port ".concat(port));
+  });
+} catch (error) {
+  console.log(error);
+}
 
-            _context.next = 4;
-            return _mongoose["default"].connect('mongodb://127.0.0.1:27017/devdb', {
-              useNewUrlParser: true
-            });
-
-          case 4:
-            _context.next = 14;
-            break;
-
-          case 6:
-            if (!(mode === 'test')) {
-              _context.next = 11;
-              break;
-            }
-
-            _context.next = 9;
-            return _mongoose["default"].connect('mongodb://127.0.0.1:27017/testdb', {
-              useNewUrlParser: true
-            });
-
-          case 9:
-            _context.next = 14;
-            break;
-
-          case 11:
-            if (!(mode === 'production')) {
-              _context.next = 14;
-              break;
-            }
-
-            _context.next = 14;
-            return _mongoose["default"].connect('mongodb+srv://landry:mongodb@cluster0.2qprh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/proddb', {
-              useNewUrlParser: true
-            });
-
-          case 14:
-            app.use(_express["default"].json());
-            app.use('/api/v1/', _routes["default"]);
-            app.listen(port, function () {
-              console.log("The server is running on port ".concat(port));
-            });
-            _context.next = 22;
-            break;
-
-          case 19:
-            _context.prev = 19;
-            _context.t0 = _context["catch"](0);
-            console.log(_context.t0);
-
-          case 22:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, null, [[0, 19]]);
-  }));
-
-  return function server() {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-server();
+var _default = app;
+exports["default"] = _default;

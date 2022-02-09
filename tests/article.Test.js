@@ -19,6 +19,7 @@ describe('ARTICLES', () => {
     await testSchema.save();
   });
 
+
   describe('TESTING GET ALL ARTICLES', () => {
     it('it should retrieve all articles', async () => {
       const res = await chai.request(app).get('/api/v1/articles');
@@ -30,6 +31,7 @@ describe('ARTICLES', () => {
       const res = await chai.request(app).get('/api/v1/artic');
       chai.expect(res).to.have.status([404]);
     });
+
   });
 
   describe('GET ONE ARTICLE BY ID', () => {
@@ -47,6 +49,7 @@ describe('ARTICLES', () => {
       chai.expect(res.body).to.have.property('author');
     });
   });
+
 
   describe('CREATE POST', () => {
     it('it should not create post without authentication', async () => {
@@ -112,6 +115,7 @@ describe('ARTICLES', () => {
       chai.expect(res.status).to.be.eq(400);
       chai.expect(res.body.errorMessage).to.be.eq('Image is required!!!');
     });
+
   });
 
   /*describe("ARTICLE COMMENTS", () => {
