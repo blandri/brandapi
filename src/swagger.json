@@ -221,8 +221,8 @@
           "parameters":[
             {
               "name":"Authorization",
-              "in":"Header"
-              
+              "in":"header",
+              "required":true
             },
             {
               "name":"title",
