@@ -12,6 +12,9 @@ export class ArticleController {
         content: req.body.content,
         image: req.body.image,
       });
+      if (!req.body.title) {
+        res.status(400).send({ error: 'title cant be empty' });
+      }
       const article = await ArticleServices.createArticle(data);
       res.status(201).send(article);
     } catch (error) {
@@ -22,7 +25,7 @@ export class ArticleController {
   async getAllArticles(req, res, next) {
     try {
       const articles = await ArticleServices.getAllArticles();
-      res.send(articles);
+      res.status(200).send(articles);
     } catch (error) {
       res.status(204).send({ error: 'no articles here' });
     }
@@ -32,7 +35,7 @@ export class ArticleController {
       const article = await ArticleServices.getArticle(req.params.id);
       res.send(article);
     } catch (error) {
-      res.status(404).send({ error: 'Error! try again' });
+      res.status(204).send({ error: 'please enter a correct id' });
     }
   }
   async updateArticle(req, res, next) {
@@ -60,8 +63,7 @@ export class ArticleController {
     try {
       await ArticleServices.deleteArticle(req.params.id);
 
-      res.status(202).send({message:"deleted successfully"});
-
+      res.status(202).send({ message: 'deleted successfully' });
     } catch {
       res.status(204, 'no article').send({ error: "Article doesn't exist!" });
     }

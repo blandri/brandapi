@@ -16,41 +16,83 @@ describe('TESTING USER ROUTE', () => {
     await testSchema.save();
   });
 
-  describe('LOG IN ROUTE', () => {
-    it('user login in with no email', async () => {
-      const res = await chai.request(app).post('/api/v1/user/login').send({
+  describe('SIGN IN ROUTE', () => {
+    before(async () => {
+      await User.deleteMany({});
+    });
+
+    it('user sign in with no email', async () => {
+      const res = await chai.request(app).post('/api/v1/user/register').send({
         email: '',
         password: '123',
       });
-      chai.expect(res.status).to.be.eq(200);
-      //chai.expect(res.body.error).to.be.eq('invalid credentials');
+      chai.expect(res.status).to.be.eq(400);
+      chai.expect(res.body.error).to.be.eq('Email is required!!!');
     });
 
-    it('user log in with no password', async () => {
-      const res = await chai.request(app).post('/api/v1/user/login').send({
+    it('user sign in with no password', async () => {
+      const res = await chai.request(app).post('/api/v1/user/register').send({
         email: 'landry@gmail.com',
         password: '',
       });
-      chai.expect(res.status).to.be.eq(200);
-      //chai.expect(res.body.error).to.be.eq('invalid credentials');
+      chai.expect(res.status).to.be.eq(400);
+      chai.expect(res.body.error).to.be.eq('Password is required!!!');
+    });
+
+    it('user register in their account', async () => {
+      const res = await chai.request(app).post('/api/v1/user/register').send({
+        email: 'landry@gmail.com',
+        password: '123',
+      });
+      chai.expect(res.status).to.be.eq(202);
+    });
+
+    it('user register in their account with email arleady exist', async () => {
+      // let register = new userModel({
+      //
+      //      email: "gabin@gmail.com",
+      //      password: "pass123#"
+      // })
+      // await register.save()
+      const res = await chai.request(app).post('/api/v1/user/register').send({
+        email: 'landry@gmail.com',
+        password: '123',
+      });
+      chai.expect(res.status).to.be.eq(404);
     });
   });
 
   describe('SIGIN VALIDATION', () => {
     it('it shoud check email validation', async () => {
-      const res = await chai.request(app).post('/api/v1/user/login').send({
-        email: 'landrygmail.com',
+      const res = await chai.request(app).post('/api/v1/user/register').send({
+        email: 'landry@gmail.com',
         password: '123',
       });
-      chai.expect(res.status).to.be.eq(200);
+      chai.expect(res.status).to.be.eq(400);
+      chai.expect(res.body.error).to.be.eq('Email is not valid!!!!');
     });
 
     it('it shoud check password validation', async () => {
+      const res = await chai.request(app).post('/api/v1/user/register').send({
+        email: 'gabin@gmail.com',
+        password: 'passs123',
+      });
+      chai.expect(res.status).to.be.eq(400);
+      chai
+        .expect(res.body.error)
+        .to.be.eq(
+          'Password must container at least one special character and number!!!'
+        );
+    });
+  });
+
+  describe('USER LOGING IN', () => {
+    it('it should login in the user', async () => {
       const res = await chai.request(app).post('/api/v1/user/login').send({
         email: 'landry@gmail.com',
-        password: '12',
+        password: '123',
       });
-      chai.expect(res.status).to.be.eq(200);
+      chai.expect(res.status).to.be.eq(202);
     });
   });
 });
