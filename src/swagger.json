@@ -137,6 +137,7 @@
             "description": "Create querie",
             "operationId": "postquerie",
             "parameters": [
+              
               {
                 "name": "body",
                 "in": "body",
@@ -159,6 +160,14 @@
             "summary": "Get all queries",
             "description": "Get all queries",
             "operationId": "getQueries",
+            "parameters":[
+              {
+                "name": "body",
+                "in": "header",
+                "description": "Authorization",
+                "required": true
+              }
+            ],
             "responses": {
               "200": {
                 "description": "Success"
@@ -369,6 +378,9 @@
           },
           "message": {
             "type": "string"
+          },
+          "location":{
+            "type":"string"
           }
         }
       }

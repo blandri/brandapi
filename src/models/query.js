@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const querrySchema = mongoose.Schema({
   email: String,
   message: String,
-  location: { type: String, default: 'Rwanda' },
+  location: String,
+  date: { type: Date, default: Date.now },
 });
 
 const Querry = mongoose.model('Querry', querrySchema);

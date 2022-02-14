@@ -6,17 +6,23 @@ export class ArticleController {
   // TODO Don't access database from this file you only needs
   async createArticle(req, res, next) {
     try {
-      req.body.image = await uploadFile(req);
-      const data = new Article({
-        title: req.body.title,
-        content: req.body.content,
-        image: req.body.image,
-      });
-      const article = await ArticleServices.createArticle(data);
-      res.status(201).send(article);
+      if (!req.body.title) {
+        res.status(404).send({ error: 'enter title' });
+      } else if (!req.body.content) {
+        res.status(404).send({ error: 'enter content' });
+      } else {
+        req.body.image = await uploadFile(req);
+        const data = new Article({
+          title: req.body.title,
+          content: req.body.content,
+          image: req.body.image,
+        });
+        const article = await ArticleServices.createArticle(data);
+        res.status(201).send(article);
+      }
     } catch (error) {
-      res.status(204);
-      res.send({ error: 'No article created' });
+      res.status(404);
+      res.send({ error: 'Not found' });
     }
   }
   async getAllArticles(req, res, next) {
@@ -24,7 +30,7 @@ export class ArticleController {
       const articles = await ArticleServices.getAllArticles();
       res.send(articles);
     } catch (error) {
-      res.status(204).send({ error: 'no articles here' });
+      res.status(404).send({ error: 'no articles here' });
     }
   }
   async getArticle(req, res, next) {
@@ -32,7 +38,7 @@ export class ArticleController {
       const article = await ArticleServices.getArticle(req.params.id);
       res.send(article);
     } catch (error) {
-      res.status(404).send({ error: 'Error! try again' });
+      res.status(404).send({ error: 'not found' });
     }
   }
   async updateArticle(req, res, next) {
@@ -60,8 +66,7 @@ export class ArticleController {
     try {
       await ArticleServices.deleteArticle(req.params.id);
 
-      res.status(202).send({message:"deleted successfully"});
-
+      res.status(202).send({ message: 'deleted successfully' });
     } catch {
       res.status(204, 'no article').send({ error: "Article doesn't exist!" });
     }
