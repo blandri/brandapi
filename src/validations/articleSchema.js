@@ -2,10 +2,7 @@ import joi from 'joi';
 
 export const articleSchema = joi.object({
   title: joi.string().max(90).min(3).required(),
-  content: joi.string().min(10).required().messages({
-    'string.empty': 'content must not be empty',
-    'string.max.base': 'content should be 10 characters long',
-  }),
+  content: joi.string().min(10).required(),
 });
 
 export const userSchema = joi.object({

@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const querrySchema = mongoose.Schema({
+  name:String,
   email: String,
   message: String,
   location: String,

@@ -12,6 +12,7 @@ export class QuerryController {
         res.status(404).send({ error: 'enter location' });
       } else {
         const data = new Querry({
+          name: req.body.name,
           email: req.body.email,
           message: req.body.message,
           location: req.body.location,

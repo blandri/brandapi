@@ -36,7 +36,7 @@ try {
   app.use(
     cors({
       origin: '*',
-      methods: ['POST', 'GET', 'DELETE'],
+      methods: ['POST', 'GET', 'DELETE','PATCH'],
     })
   );
   app.use(morgan('dev'));
