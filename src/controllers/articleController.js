@@ -29,6 +29,7 @@ export class ArticleController {
     try {
       const articles = await ArticleServices.getAllArticles();
       res.send(articles);
+      
     } catch (error) {
       res.status(404).send({ error: 'no articles here' });
     }

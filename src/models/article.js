@@ -9,5 +9,6 @@ const articleSchema = mongoose.Schema({
   likes: { type: Number, default: 0 },
   created_on: { type: Date, default: Date.now },
 });
+
 const Article = mongoose.model('Article', articleSchema);
 export default Article;

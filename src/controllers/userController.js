@@ -38,7 +38,7 @@ export class userController {
         res.status(401).send({ error: 'invalid credentials' });
       }
     } catch (error) {
-      res.status(401).send({ error: 'invalid credentials' });
+      res.status(404).send({ error: 'not found' });
     }
   }
   async getUser(req, res) {
