@@ -6,6 +6,10 @@ export class likeServices {
     return await data.save();
   }
 
+  static async dislike(id) {
+    return await Likes.deleteOne({ articleid: id });
+  }
+
   static async getLikes(id) {
     return await Article.findOne({ articleid: id });
   }

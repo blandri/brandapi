@@ -69,7 +69,7 @@ export class ArticleController {
 
       res.status(202).send({ message: 'deleted successfully' });
     } catch {
-      res.status(204, 'no article').send({ error: "Article doesn't exist!" });
+      res.status(404).send({ error: "not found" });
     }
   }
 }

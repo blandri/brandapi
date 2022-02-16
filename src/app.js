@@ -1,8 +1,9 @@
+import cors from 'cors';
+import morgan from 'morgan';
 import express from 'express';
 import mongoose from 'mongoose';
 import routes from './routes/index.js';
-import cors from 'cors';
-import morgan from 'morgan';
+
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './swagger.json';
 import 'dotenv/config';
@@ -36,7 +37,7 @@ try {
   app.use(
     cors({
       origin: '*',
-      methods: ['POST', 'GET', 'DELETE','PATCH'],
+      methods: ['POST', 'GET', 'DELETE', 'PATCH'],
     })
   );
   app.use(morgan('dev'));

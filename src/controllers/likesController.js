@@ -19,6 +19,20 @@ export class likeControll {
     }
   }
 
+  async disLike(req, res) {
+    try {
+      const art = await Article.findOne({ _id: req.params.articleid });
+
+      art.likes -= 1;
+      await likeServices.dislike(req.params.articleid);
+      const artt = await ArticleServices.createArticle(art);
+
+      res.status(200).send(artt);
+    } catch (error) {
+      res.status(404).send({ error: 'not found' });
+    }
+  }
+
   async getLike(req, res) {
     try {
       const lik = await likeServices.getLikes(req.params.articleid);
