@@ -13,6 +13,6 @@ routes.use('/articles', articleRoutes);
 routes.use('/queries', queriesRoutes);
 routes.use('/user', userRoutes);
 routes.use('/comment', commentRoutes);
-routes.use('like', likeRoutes);
+routes.use('/like', likeRoutes);
 
 export default routes;

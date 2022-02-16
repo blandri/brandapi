@@ -32,4 +32,8 @@ export class ArticleServices {
   static async deleteArticle(id) {
     return await Article.deleteOne({ _id: id });
   }
+
+  static async Like(id) {
+    return Article.findOneAndUpdate({ _id: id });
+  }
 }
