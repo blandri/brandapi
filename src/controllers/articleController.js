@@ -29,7 +29,6 @@ export class ArticleController {
     try {
       const articles = await ArticleServices.getAllArticles();
       res.send(articles);
-      
     } catch (error) {
       res.status(404).send({ error: 'no articles here' });
     }
@@ -54,7 +53,7 @@ export class ArticleController {
       }
 
       if (req.body.image) {
-        data['image'] = req.file.image;
+        data['image'] = req.body.image;
       }
 
       const article = await ArticleServices.updateArticle(req.params.id, data);
@@ -69,7 +68,7 @@ export class ArticleController {
 
       res.status(202).send({ message: 'deleted successfully' });
     } catch {
-      res.status(404).send({ error: "not found" });
+      res.status(404).send({ error: 'not found' });
     }
   }
 }
